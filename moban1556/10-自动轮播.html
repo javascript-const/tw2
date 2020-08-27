@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background: url(../moban1556/images/11.jpg) no-repeat;
+            background-size: 100% ;
+        }
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        ul,
+        li {
+            list-style-type: none;
+        }
+        
+        .carousel {
+            width: 750px;
+            height: 360px;
+            padding: 5px;
+            margin: 50px auto 0;
+            border: 1px solid #eee;
+            /* 相对定位 */
+            position: relative;
+        }
+        
+        #imgList {
+            width: 750px;
+            height: 360px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #imgList ul {
+            width: 500%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        #imgList ul li {
+            float: left;
+        }
+        #imgList ul li img{
+            width: 750px;
+            height: 360px;
+        }
+        
+        .circleList {
+            width: 120px;
+            padding: 8px;
+            position: absolute;
+            left: 50%;
+            margin-left: -60px;
+            bottom: 20px;
+            background-color: rgba(0, 0, 0, .2);
+            border-radius: 12px;
+        }
+        
+        .circle {
+            float: left;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            /* 鼠标样式 */
+            cursor: pointer;
+            margin-left: 10px;
+            background-color: #fff;
+        }
+        
+        .active {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- carousel:轮播 -->
+    <div class="carousel">
+        <!-- 图片盒子 -->
+        <div id="imgList">
+            <!-- 移动的ul -->
+            <ul id="viewpage">
+                <li><img src="../moban1556/images/timg1.jpg" alt="banner1"></li>
+                <li><img src="../moban1556/images/timg (1).jpg" alt="banner2"></li>
+                <li><img src="../moban1556/images/timg (2).jpg" alt="banner3"></li>
+                <li><img src="../moban1556/images/timg (3).jpg" alt="banner4"></li>
+                <li><img src="../moban1556/images/timg (4).jpg" alt="banner5"></li>
+            </ul>
+        </div>
+        <div class="circleList">
+            <span class="circle active"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+        </div>
+    </div>
+    <script src="../moban1556/js/util.js"></script>
+    <script>
+        // 获取元素
+        var viewpage = document.getElementById('viewpage');
+        var circles = document.getElementsByClassName('circle');
+        // 自动轮播
+        function autoplay() {
+            // 旗帜:轮播的第几张图片
+            var flag = 1;
+            // 定时器的名字不能和封装的函数保持一致
+            viewpage.viewTimerId = setInterval(function() {
+                // flag在最后要从新开始
+                flag = flag > circles.length - 1 ? 0 : flag;
+                // 排他
+                for (var j = 0; j < circles.length; j++) {
+                    circles[j].className = 'circle';
+                };
+                // 设置当前小圆点变红
+                circles[flag].className = 'circle active';
+                // 动画
+                var target = flag * (-750);
+                jsAnimate1(viewpage, target);
+                flag++;
+                console.log(flag);
+            }, 1000)
+        }
+        autoplay();
+    </script>
+</body>
+
+</html>
