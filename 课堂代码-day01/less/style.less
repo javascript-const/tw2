@@ -1,0 +1,68 @@
+// less文件需要在服务器环境下才能够被编译执行
+//vscode中的插件  live server
+
+@color:red;
+@color:yellow;  //这个会把上边的覆盖了
+@width:200px;  //全局变量
+@height:200px;
+
+.header{
+    color: @color;
+    font-size: 50px;
+}
+.box{
+    width: @width;
+    height: @height;
+    background: @color;
+}
+
+.content{
+    @width:100px; //局部变量
+    width: @width;
+    height: @height;
+    background: @color;
+}
+
+
+// 变量可以用像 @{name} 这样的结构，以类似 ruby 和 php 的方式嵌入到字符串中。
+@myurl:"https://img11.360buyimg.com/";
+.con2{
+    width: 300px;
+    height: 300px;
+    background: url("@{myurl}babel/s1180x940_jfs/t1/126932/39/9994/98612/5f3cd33bEa54f97c7/5804c45d87577f5f.jpg");
+}
+
+// 如果需要在选择器中使用 LESS 变量，只需通过使用和字符串插件一样的@{selector} 即可。
+
+@myselectName:con77;
+
+.@{myselectName}{
+    width: 520px;
+    height: 521px;
+    background:@color
+}
+
+// 如果你希望在 media query 中使用 LESS 变量，你可以直接使用普通的变量方式。因为“~”后面的值是不被编译的，所以可以用作 media query 的参数。
+
+@tj:~"(max-width:768px)";
+@media screen and @tj{
+    .con66{
+        width: 520px;
+        height: 521px;
+        background:@color
+    }
+}
+
+// 用一个变量值的变量
+// 在定义变量值时使用其它的变量。
+
+@owidth:520px;
+@loveWidth:@owidth;   //定义一个变量时使用其他变量
+
+.con5{
+    width: @loveWidth;
+    height: 100px;
+    background-color: #f00;
+}
+
+

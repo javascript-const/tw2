@@ -1,0 +1,90 @@
+// 在 LESS 中，可以定义一些通用的属性集为一个 class，然后在另一个 class 中去调用这些属性。如果我们现在需要在其他 class 中引入那些通用的属性集，那么我们只需要在任何 class 中调用就可以了。任何 CSS class, id 属性集都可以以同样的方式引入。
+.width{
+    width: 520px;
+}
+.height{
+    height: 520px;
+}
+
+#fs50{
+    font-size: 50px
+}
+
+#header{
+    .width;
+    .height;
+    #fs50;
+    background-color: #f00;
+}
+
+//带有参数的混合
+.owidth(@w,@h){
+    width: @w;
+    height: @h;
+}
+
+.box{
+    .owidth(300px,100px);
+    background: green; 
+}
+
+
+// 隐藏属性的继承
+.width2(){
+    width: 521px;
+}
+#height2(){
+    height: 521px;
+}
+
+.pox{
+    .width2();
+    .p{
+        #height2();
+        background: yellow;
+    }
+}
+
+
+// 参数默认值
+
+.width3(@w3:100px){
+    width: @w3;
+}
+.cox{
+    .width3();
+    height: 100px;
+    background: pink;
+}
+
+
+//多个参数
+.width4(@w4;@color;@h:200px){  //参数有默认值的时候写在后面
+    width: @w4;
+    height: @h;
+    background: @color;
+}
+
+.content{
+    .width4(200px,red)
+}
+
+.trans(@attr:all;@time:3s;@type:ease;@delay:2s){
+    -webkit-transition: @arguments;
+    transition: @arguments;
+};
+.con5{
+    .trans()  
+}
+
+// !important 关键字
+
+.con6fn(@w:100px;@height:100px;){
+    width: @w;
+    height: @height;
+}
+
+.con6{
+    .con6fn() !important;
+    background:red;
+}
